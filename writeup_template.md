@@ -23,9 +23,9 @@ The goals / steps of this project are the following:
 [image2]: ./Undistorted.PNG "Road Transformed"
 [image3]: ./Color_Binary.PNG "Binary Example"
 [image4]: ./Perspective_Transform.PNG "Warp Example"
-
-[image6]: .Advanced_Lane_Lines/IMage_Lane.PNG "Output"
-[video1]: ./project_video.mp4 "Video"
+[image5]: ./Lane_Line.PNG "Output"
+[image6]: ./IMage_Lane.PNG "Output"
+[video1]: ./project_video_test.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
@@ -60,7 +60,7 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at 3 rd code cell in `Advanced_Lane_Line.ipynb`).  Here's an example of my output for this step. 
+I used a combination of R channel ad S channel color and Gray image and R_channel gradient thresholds to generate a binary image (thresholding steps at 3 rd code cell in `Advanced_Lane_Line.ipynb`).  Here's an example of my output for this step. 
 
 ![alt text][image3]
 
@@ -69,16 +69,11 @@ I used a combination of color and gradient thresholds to generate a binary image
 The code for my perspective transform includes a function called `corners_unwarp_lane_lines()`, which appears in 4th code cell  in the file `Advanced_Lane_Line.ipynb` (./Advanced_Lane_Line.ipynb) .  The `corners_unwarp_lane_lines()()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
+src=np.float32([(560, 460),(680, 460),(130, 720),(1220, 720)])
+        
+dst=np.float32([(90, 0),(940, 0), (90, 720), 
+                                     (940, 720)
+                                     ])
 ```
 
 This resulted in the following source and destination points:
@@ -102,7 +97,7 @@ Then I did some other stuff and fit my lane lines with a 2nd order polynomial ki
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `Advanced_Lane_Line.ipynb`
+I did this in 8-15 cell in my code in `Advanced_Lane_Line.ipynb`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
@@ -124,4 +119,6 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Here I'll talk about the approach I took, Camera Claibartion,Distortion,Color Gradient and Perspective transform but 
+1.for where region the white line was absent there my pipeline was failing to combat that I used R_channel where white line from color brightness were not removed due to which there were detected for whole lanes but better technique would be to average the channel.
+2.the perspective transform fails for the curvature where there is turn.
