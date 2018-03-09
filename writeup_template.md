@@ -21,10 +21,10 @@ The goals / steps of this project are the following:
 
 [image1]: ./test_undist.jpg "Undistorted"
 [image2]: ./Undistorted.PNG "Road Transformed"
-[image3]: ./Color_Binary.PNG "Binary Example"
-[image4]: ./Perspective_Transform.PNG "Warp Example"
-[image5]: ./Lane_Line.PNG "Output"
-[image6]: ./IMage_Lane.PNG "Output"
+[image3]: ./Color_Binarys.PNG "Binary Example"
+[image4]: ./Perspective_Transforms.PNG "Warp Example"
+[image5]: ./Lane_Lines.PNG "Output"
+[image6]: ./IMage_Lanes.PNG "Output"
 [video1]: ./project_video_test.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
