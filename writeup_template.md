@@ -69,7 +69,7 @@ I used a combination of R channel ad S channel color and Gray image and R_channe
 The code for my perspective transform includes a function called `corners_unwarp_lane_lines()`, which appears in 4th code cell  in the file `Advanced_Lane_Line.ipynb` (./Advanced_Lane_Line.ipynb) .  The `corners_unwarp_lane_lines()()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
 ```python
-src=np.float32([(560, 460),(680, 460),(130, 720),(1220, 720)])
+src=np.float32([(570, 470),(690, 475),(150, 720),(1240, 720)])
         
 dst=np.float32([(90, 0),(940, 0), (90, 720), 
                                      (940, 720)
@@ -80,10 +80,10 @@ This resulted in the following source and destination points:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+| 570, 470      | 90, 0        | 
+| 690, 475      | 940, 0      |
+| 150, 720     | 90, 720      |
+| 1240, 720      | 940, 0        |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
