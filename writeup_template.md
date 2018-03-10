@@ -114,7 +114,7 @@ I did this in lines # 570-600 # in my code in `Advanced_Lane_Line.py`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # 446-464 # in my code in `Advanced_Lane_Line.py` in the function pipeline_flow() .  Here is an example of my result on a test image:
+I implemented this step in lines # 570-600 # in my code in `Advanced_Lane_Line.py` in the function pipeline_flow() .  Here is an example of my result on a test image:
 
 ![alt text][image6]
 
