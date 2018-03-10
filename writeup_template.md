@@ -19,12 +19,12 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/undistort_output.png "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
+[image1]: ./test_undist.jpg "Undistorted"
+[image2]: ./Undistorted.PNG "Road Transformed"
+[image3]: ./Color_Combined.PNG "Binary Example"
+[image4]: ./Perspective_Transform.PNG "Warp Example"
+[image5]: ./Lane_Line.PNG "Fit Visual"
+[image6]: ./Image_Lane.PNG "Output"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -60,28 +60,46 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at 3 rd code cell in `Advanced_Lane_Line.ipynb`).  Here's an example of my output for this step. 
+I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at 3 rd code cell in `Advanced_Lane_Line.ipynb`).
+As for Gradient threshold I used:
+sobelx of the gray image with doing AND operation with sobelx of r-channel to get binary output as given below.
+
+**(sobel_X == 1)&(scaled_sobel_R==1)**
+
+As for Color Threshold I used:
+S-channel of HSL color space as because to detect the lane lines under extreme light,R-Channel of RGB for better lane line and LAB color space for detecting yellow lane lines.As I applied AND operation for all the color channel given below.
+
+**(s_binary==1)&((s_binary_R==1)&(s_binary_LV==1))**
+
+And at last I have used OR operation to combine and form image as given below
+
+Here's an example of my output for this step. 
 
 ![alt text][image3]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `corners_unwarp_lane_lines()`, which appears in 4th code cell  in the file `Advanced_Lane_Line.ipynb` (./Advanced_Lane_Line.ipynb) .  The `corners_unwarp_lane_lines()()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `corners_unwarp()`, which appears in 4th code cell  in the file `Advanced_Lane_Line.ipynb` (./Advanced_Lane_Line.ipynb) .  The `corners_unwarp()()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner which I drawn manually:
 
 ```python
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
+    src=np.float32([(565, 470),(260, 674),(1048, 674),(720, 470)])
+
+    dst=np.float32([(260, 100),(260, 674), (1048, 674), 
+                                 (1048, 100)
+                                 ])
 ```
 
 This resulted in the following source and destination points:
+
+| Source        | Destination   | 
+|:-------------:|:-------------:| 
+| 565, 470      | 260, 100        | 
+| 260, 674      | 260, 674      |
+| 1048, 674     | 1048, 674      |
+| 720, 470      | 1048, 100        |
+
+
+**My previous points were as source and destination points:**
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
@@ -102,11 +120,11 @@ Then I did some other stuff and fit my lane lines with a 2nd order polynomial ki
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `Advanced_Lane_Line.ipynb`
+I did this in lines # 570-600 # in my code in `Advanced_Lane_Line.py`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `Advanced_Lane_Line.ipynb`.  Here is an example of my result on a test image:
+I implemented this step in lines # 446-464 # in my code in `Advanced_Lane_Line.py`.  Here is an example of my result on a test image:
 
 ![alt text][image6]
 
@@ -116,7 +134,7 @@ I implemented this step in lines # through # in my code in `Advanced_Lane_Line.i
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./project_video_out.mp4)
 
 ---
 
@@ -125,3 +143,7 @@ Here's a [link to my video result](./project_video.mp4)
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+
+1.As my pipeline previously failed for correctly rectify perspective transform for project video but after correcting it became more stable.As one of my observation was wobbling lines due which it lane line was getting fluctuated to combat that I used sobelx of r-channel which made my lane detection more stable. My pipeline fails only for very sharp shadow and light change which can be modified by a better robust color thresholds.
+
+2.Averaging of lane line will also help lane line to detect image better for other challenging video basically where lane lines are not present.
