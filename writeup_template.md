@@ -24,7 +24,7 @@ The goals / steps of this project are the following:
 [image3]: ./Color_Combined.PNG "Binary Example"
 [image4]: ./Perspective_Transform.PNG "Warp Example"
 [image5]: ./Lane_Line.PNG "Fit Visual"
-[image6]: ./Image_Lane.PNG "Output"
+[image6]: ./Video_Lane.png "Output"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -97,16 +97,6 @@ This resulted in the following source and destination points:
 | 260, 674      | 260, 674      |
 | 1048, 674     | 1048, 674      |
 | 720, 470      | 1048, 100        |
-
-
-**My previous points were as source and destination points:**
-
-| Source        | Destination   | 
-|:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
