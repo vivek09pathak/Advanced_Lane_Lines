@@ -103,8 +103,7 @@ I verified that my perspective transform was working as expected by drawing the 
 ![alt text][image4]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
-
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+I used the code provided from Udacity classroom as I can see that sliding wimdow was drawn perfectly onto the wrap image.As iit fit my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
 
