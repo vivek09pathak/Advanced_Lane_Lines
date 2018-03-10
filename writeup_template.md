@@ -55,7 +55,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
+To demonstrate this step, I used function cv2.undistort(img,mtx,dist,None,mtx) to image for the distortion correction to one of the test images like this one:
 ![alt text][image2]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
@@ -109,7 +109,7 @@ I used the code provided from Udacity classroom as I can see that sliding wimdow
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # 570-600 # in my code in `Advanced_Lane_Line.py`
+I did this in lines # 570-600 # as I used the average radius of left_curverad and right_curverad to calculate the radius of curvature and to calculate absolute of image shape width average minus left and right points array average in my code of `Advanced_Lane_Line.py`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
@@ -136,3 +136,5 @@ Here I'll talk about the approach I took, what techniques I used, what worked an
 1.As my pipeline previously failed for correctly rectify perspective transform for project video but after correcting it became more stable.As one of my observation was wobbling lines due which it lane line was getting fluctuated to combat that I used sobelx of r-channel which made my lane detection more stable. My pipeline fails only for very sharp shadow and light change which can be modified by a better robust color thresholds.
 
 2.Averaging of lane line will also help lane line to detect image better for other challenging video basically where lane lines are not present.
+
+3.Mean of the lines to remove bad frames from video
